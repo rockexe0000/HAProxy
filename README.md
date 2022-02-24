@@ -261,8 +261,7 @@ apache-jmeter-5.4.1/bin/jmeter -g /home/user/result.jtl -o /home/user/ResultRepo
 
 [index.html](./assets/ResultReport/index.html)
 
-![[Pasted image 20220224192355.png]]
-
+![image20220224192355.png](./assets/image20220224192355.png)
 
 jmeter testcase
 [test.jmx](./assets/test.jmx)
