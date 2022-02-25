@@ -197,6 +197,14 @@ balance關鍵字：
 
 ![top.png](./assets/top.png)
 
+### 環境
+>
+frontend webserver: 192.168.211.200
+backend webserver: 192.168.100.31, 192.168.100.32
+test: jmeter
+OS: ubuntu 20.04
+
+### haproxy
 
 安裝 haproxy
 ```
@@ -234,7 +242,7 @@ service haproxy restart
 
 
 
-用 jmeter 做壓力測試
+### 用 jmeter 做壓力測試
 
 安裝並執行
 ```
@@ -250,24 +258,59 @@ cd apache-jmeter-5.4.1/bin
 
 ```
 
+Test Plan (按右鍵)-> add -> Threads (Users) ->Thread Group
+![image20220225090914.png](./assets/image20220225090914.png)
+模擬 1000個使用者執行次
+![image20220225091306.png](./assets/image20220225091306.png)
+Test Plan (按右鍵)-> add -> Sampler -> HTTP Request
+![image20220225091358.png](./assets/image20220225091358.png)
+測試IP:192.168.211.200
+![image20220225091526.png](./assets/image20220225091526.png)
+Test Plan (按右鍵)-> add -> Listener -> View Results Tree
+![image20220225091554.png](./assets/image20220225091554.png)
+開始測試
+![image20220225091733.png](./assets/image20220225091733.png)
+設定 jmeter 測試計畫檔(.jmx)位置
+![image20220225091835.png](./assets/image20220225091835.png)
+測試中
+![image20220225092151.png](./assets/image20220225092151.png)
+測試完成
+![image20220225092334.png](./assets/image20220225092334.png)
+
+
+
+
+
 產生測試報告
 ```
-# 產生HTML報告(沒有.jtl檔案)
-apache-jmeter-5.4.1/bin/jmeter -n -t source.jmx -l /home/user/result.jtl -e -o /home/user/ResultReport
+# 清除之前執行過的檔案
+rm -rf /home/user/result.jtl
+rm -rf /home/user/ResultReport
 
-# 產生HTML報告(有.jtl檔案)
-apache-jmeter-5.4.1/bin/jmeter -g /home/user/result.jtl -o /home/user/ResultReport
+# 產生測試報告(沒有.jtl檔案)
+/home/user/apache-jmeter-5.4.1/bin/jmeter -n -t /home/user/test.jmx -l /home/user/result.jtl -e -o /home/user/ResultReport
+
+# 產生測試報告(有.jtl檔案)
+/home/user/apache-jmeter-5.4.1/bin/jmeter -g /home/user/result.jtl -o /home/user/ResultReport
 ```
 
-[index.html](./assets/ResultReport/index.html)
 
-![image20220224192355.png](./assets/image20220224192355.png)
 
-jmeter testcase
+測試報告首頁
+![image20220225102230.png](./assets/image20220225102230.png)
+可以選擇想看的圖表
+![image20220225102152.png](./assets/image20220225102152.png)
+![image20220225102002.png](./assets/image20220225102002.png)
+
+jmeter 測試計畫檔(.jmx)
 [test.jmx](./assets/test.jmx)
 
-jmeter log
-[View-Results-in-Table.jmx](./assets/View-Results-in-Table.jmx)
+jmeter 測試結果(xxx.jtl)
+[result.jtl](./assets/result.jtl)
+
+jmeter 測試報告
+[index.html](./assets/ResultReport/index.html)
+
 
 -----
 
@@ -320,7 +363,7 @@ haproxy 監控工具，可以即時看到 HAPRoxy 的狀態
 
 [Linux之實訓篇——haproxy配置負載均衡及訪問控制](https://www.itread01.com/content/1550005576.html)
 
-
+[## IT｜軟體｜測試｜JMeter 自動生成測試報告](https://ithelp.ithome.com.tw/articles/10194368)
 
 
 
