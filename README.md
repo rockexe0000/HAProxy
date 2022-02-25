@@ -373,7 +373,7 @@ haproxy 監控工具，可以即時看到 HAPRoxy 的狀態
 
 [Linux之實訓篇——haproxy配置負載均衡及訪問控制](https://www.itread01.com/content/1550005576.html)
 
-[## IT｜軟體｜測試｜JMeter 自動生成測試報告](https://ithelp.ithome.com.tw/articles/10194368)
+[IT｜軟體｜測試｜JMeter 自動生成測試報告](https://ithelp.ithome.com.tw/articles/10194368)
 
 
 
