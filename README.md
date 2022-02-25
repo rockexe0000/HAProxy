@@ -259,38 +259,40 @@ cd apache-jmeter-5.4.1/bin
 
 ```
 
-Test Plan (按右鍵)-> add -> Threads (Users) ->Thread Group
+### 設定並測試
+
+#### Test Plan (按右鍵)-> add -> Threads (Users) ->Thread Group
 ![image20220225090914.png](./assets/image20220225090914.png)
 
-模擬 1000個使用者執行次
+#### 模擬 1000個使用者執行100次
 ![image20220225091306.png](./assets/image20220225091306.png)
 
-Test Plan (按右鍵)-> add -> Sampler -> HTTP Request
+#### Test Plan (按右鍵)-> add -> Sampler -> HTTP Request
 ![image20220225091358.png](./assets/image20220225091358.png)
 
-測試IP:192.168.211.200
+#### 測試IP:192.168.211.200
 ![image20220225091526.png](./assets/image20220225091526.png)
 
-Test Plan (按右鍵)-> add -> Listener -> View Results Tree
+#### Test Plan (按右鍵)-> add -> Listener -> View Results Tree
 ![image20220225091554.png](./assets/image20220225091554.png)
 
-開始測試
+#### 開始測試
 ![image20220225091733.png](./assets/image20220225091733.png)
 
-設定 jmeter 測試計畫檔(.jmx)位置
+#### 設定 jmeter 測試計畫檔(.jmx)位置
 ![image20220225091835.png](./assets/image20220225091835.png)
 
-測試中
+#### 測試中
 ![image20220225092151.png](./assets/image20220225092151.png)
 
-測試完成
+#### 測試完成
 ![image20220225092334.png](./assets/image20220225092334.png)
 
 
 
 
 
-產生測試報告
+#### 產生測試報告
 ```
 # 清除之前執行過的檔案
 rm -rf /home/user/result.jtl
@@ -302,8 +304,6 @@ rm -rf /home/user/ResultReport
 # 產生測試報告(有.jtl檔案)
 /home/user/apache-jmeter-5.4.1/bin/jmeter -g /home/user/result.jtl -o /home/user/ResultReport
 ```
-
-
 
 測試報告首頁
 ![image20220225102230.png](./assets/image20220225102230.png)
@@ -323,7 +323,7 @@ jmeter 測試報告
 
 
 -----
-
+### haproxy 監控畫面
 
 haproxy 監控工具，可以即時看到 HAPRoxy 的狀態
 ![image20220223204400.png](./assets/image20220223204400.png)
