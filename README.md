@@ -198,11 +198,12 @@ balance關鍵字：
 ![top.png](./assets/top.png)
 
 ### 環境
->
+```
 frontend webserver: 192.168.211.200
 backend webserver: 192.168.100.31, 192.168.100.32
 test: jmeter
 OS: ubuntu 20.04
+```
 
 ### haproxy
 
@@ -260,20 +261,28 @@ cd apache-jmeter-5.4.1/bin
 
 Test Plan (按右鍵)-> add -> Threads (Users) ->Thread Group
 ![image20220225090914.png](./assets/image20220225090914.png)
+
 模擬 1000個使用者執行次
 ![image20220225091306.png](./assets/image20220225091306.png)
+
 Test Plan (按右鍵)-> add -> Sampler -> HTTP Request
 ![image20220225091358.png](./assets/image20220225091358.png)
+
 測試IP:192.168.211.200
 ![image20220225091526.png](./assets/image20220225091526.png)
+
 Test Plan (按右鍵)-> add -> Listener -> View Results Tree
 ![image20220225091554.png](./assets/image20220225091554.png)
+
 開始測試
 ![image20220225091733.png](./assets/image20220225091733.png)
+
 設定 jmeter 測試計畫檔(.jmx)位置
 ![image20220225091835.png](./assets/image20220225091835.png)
+
 測試中
 ![image20220225092151.png](./assets/image20220225092151.png)
+
 測試完成
 ![image20220225092334.png](./assets/image20220225092334.png)
 
@@ -298,6 +307,7 @@ rm -rf /home/user/ResultReport
 
 測試報告首頁
 ![image20220225102230.png](./assets/image20220225102230.png)
+
 可以選擇想看的圖表
 ![image20220225102152.png](./assets/image20220225102152.png)
 ![image20220225102002.png](./assets/image20220225102002.png)
