@@ -224,22 +224,89 @@ frontend example_front_end
 # 轉發的後端服務
 backend web_servers
     balance roundrobin
-    server server-1 192.168.100.31:80 check
-    server server-2 192.168.100.32:80 check
+#    balance leastconn
+    server server-1 192.168.100.31:80 check weight 50  agent-check  agent-addr 192.168.100.31  agent-port 3000  agent-inter 5s
+    server server-2 192.168.100.32:80 check weight 50  agent-check  agent-addr 192.168.100.32  agent-port 3000  agent-inter 5s
 
 # 查看伺服器效能
 listen stats
     bind :32600
     stats enable
     stats uri /
+	stats refresh 1s
     stats hide-version
     stats auth root:123456
 ```
+
+
+不設 listen port 改用 frontend 的組態檔寫法
+```
+frontend example_front_end
+ bind *:80
+ mode http
+ stats enable
+ stats uri /stats
+ stats refresh 1s
+ default_backend web_servers
+
+backend web_servers
+ balance roundrobin
+# balance leastconn
+ server server-1 192.168.100.31:80 check weight 100 check agent-check agent-inter 5s agent-addr 192.168.100.31 agent-port 3000
+ server server-2 192.168.100.32:80 check weight 100 check agent-check agent-inter 5s agent-addr 192.168.100.32 agent-port 3000
+```
+
 
 重新啟動 haproxy
 ```
 service haproxy restart
 ```
+
+
+haproxy-agent-check 安裝在 server-1 或 server-2 :
+```
+apt install golang-go
+apt install gccgo-go
+
+cd /home/user
+
+git clone https://github.com/rockexe0000/haproxy-agent-check-example
+
+cd haproxy-agent-check-example/src
+
+GOOS=linux GOARCH=amd64 go build -v -o ./agent .
+
+./agent
+```
+
+
+<https://github.com/rockexe0000/haproxy-agent-check-example/blob/master/src/agent.go>，這裡可以調整分配權重的邏輯，我是以 cpu 閒置當作依據
+```
+cpuIdleString := strconv.FormatFloat(cpuIdle, 'f', 0, 64)
+
+fmt.Println("CPU Usage high - Setting server weight to %s%", cpuIdleString)
+
+//cpuIdleString := reflect.TypeOf(cpuIdleString)
+
+sendMsg := cpuIdleString + "%\n"
+
+c.Send(sendMsg)
+```
+
+
+
+讓server-1 或 server-2 的 cpu高負載
+```
+apt install stress-ng
+
+stress-ng -c 0 -l 60
+```
+
+
+
+
+
+
 
 
 
@@ -375,12 +442,13 @@ haproxy 監控工具，可以即時看到 HAPRoxy 的狀態
 
 [IT｜軟體｜測試｜JMeter 自動生成測試報告](https://ithelp.ithome.com.tw/articles/10194368)
 
+[Herald — Haproxy load feedback and check agent](https://medium.com/helpshift-engineering/herald-haproxy-load-feedback-and-check-agent-1b8749a13f02)
 
+[Agent Health Checks](https://www.haproxy.com/documentation/hapee/latest/load-balancing/health-checking/agent-health-checks/)
 
+[HAProxy Agent Check Example](https://github.com/haproxytechblog/haproxy-agent-check-example)
 
-
-
-
+[Exploring the HAProxy Stats Page](https://www.haproxy.com/blog/exploring-the-haproxy-stats-page/)
 
 
 
